@@ -20,7 +20,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     text-align: center;
-    width: 400px;
+    width: 500px;
 }
 
 h1 {
@@ -35,9 +35,18 @@ p {
     line-height: 1.5;    
 }
 
+.pipe-system {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    position: relative;
+}
+
+/* Progress Bar */
 .progress-container {
     position: relative;
-    margin: 2rem 0;
+    width: 100%;
 }
 
 .progress-bar {
@@ -45,7 +54,7 @@ p {
     height: 30px;
     background: #ecf0f1;
     border-radius: 15px;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     border: 2px solid #bdc3c7;
 }
@@ -59,93 +68,50 @@ p {
     background: linear-gradient(90deg, #2ecc71, #1abc9c);
     border-radius: 15px;
     transition: width 0.3s ease;
-    overflow: hidden;
-}
-
-.leak-hole {
-    position: absolute;
-    width: 12px;
-    height: 6px;
-    background: #e74c3c;
-    border-radius: 0 0 6px 6px;
-    bottom: -2px;
-    left: 15px;
-    opacity: 0;
-    z-index: 2;
-    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.8);
-    transition: opacity 0.3s ease;
-}
-
-.water-drip {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: #1abc9c;
-    border-radius: 50%;
-    bottom: -4px;
-    left: 16px;
-    opacity: 0;
     z-index: 1;
 }
 
-/* Water dripping animation */
-@keyframes drip {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: translateY(5px) scale(1.2);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(25px) scale(0.5);
-    }
-}
-
-@keyframes continuousDrip {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    80% {
-        opacity: 0.7;
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.3);
-    }
-}
-
-.dripping {
-    animation: continuousDrip 0.8s ease-in infinite;
-}
-
-/* Water stream animation */
-@keyframes waterStream {
-    0% {
-        height: 0;
-        opacity: 0.8;
-    }
-    50% {
-        height: 20px;
-        opacity: 0.6;
-    }
-    100% {
-        height: 0;
-        opacity: 0;
-    }
-}
-
-.water-stream {
+/* Pipe Circles */
+.pipe-circle {
     position: absolute;
-    width: 6px;
-    background: linear-gradient(to bottom, #1abc9c, transparent);
-    bottom: -2px;
-    left: 17px;
-    border-radius: 0 0 3px 3px;
-    animation: waterStream 0.4s ease-out infinite;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 3px solid #95a5a6;
+    background: #ecf0f1;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.input-circle {
+    left: 0;
+    margin-left: 2px;
+}
+
+.output-circle {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Liquid Fill in Circles */
+.liquid-fill {
+    position: absolute;
+    width: 100%;
+    background: linear-gradient(to bottom, #2ecc71, #1abc9c);
+    transition: height 0.3s ease;
+    border-radius: 50%;
+    bottom: 0;
+}
+
+.input-liquid {
+    height: 0%;
+}
+
+.output-liquid {
+    height: 0%;
+    background: linear-gradient(to bottom, #1abc9c, #2ecc71);
 }
 
 .progress-text {
@@ -157,7 +123,7 @@ p {
     color: #2c3e50;
     font-size: 0.9rem;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-    z-index: 1;
+    z-index: 3;
 }
 
 .status {
@@ -167,13 +133,85 @@ p {
     min-height: 1.5em;
 }
 
-/* Progress bar shaking when leaking */
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-2px); }
-    75% { transform: translateX(2px); }
+/* Liquid Flow Animations */
+@keyframes flowPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
 }
 
-.leaking-shake {
-    animation: shake 0.1s ease-in-out infinite;
+.flowing {
+    animation: flowPulse 1s ease-in-out infinite;
+}
+
+/* Leaking Animation */
+@keyframes leakGlow {
+    0%, 100% { 
+        box-shadow: 0 0 5px #e74c3c, 0 0 0 2px #e74c3c;
+    }
+    50% { 
+        box-shadow: 0 0 15px #e74c3c, 0 0 0 3px #e74c3c;
+    }
+}
+
+.leaking-hole {
+    animation: leakGlow 0.8s ease-in-out infinite;
+    border-color: #e74c3c !important;
+}
+
+/* Bubble animations */
+.bubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: bubbleRise 1.5s ease-in infinite;
+}
+
+@keyframes bubbleRise {
+    0% {
+        transform: translateY(0) scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-20px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Drip animations */
+@keyframes dripFall {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(25px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.dripping {
+    animation: dripFall 1s ease-in infinite;
+}
+
+/* Hole connection animations */
+@keyframes holeConnect {
+    0% {
+        transform: translateY(-50%) scale(0);
+    }
+    70% {
+        transform: translateY(-50%) scale(1.1);
+    }
+    100% {
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+.hole-connecting {
+    animation: holeConnect 0.4s ease-out;
 }

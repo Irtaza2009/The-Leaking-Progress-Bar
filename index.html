@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Non-Ending Progress Bar</title>
+    <title>The Pipe Progress System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,14 +11,24 @@
         <h1>System Update</h1>
         <p>Installing updates, please wait...</p>
 
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar">
-                <div class="progress-fill" id="progressFill">
-                    <div class="water-drip" id="waterDrip"></div>
+        <div class="pipe-system">
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                    
+                    <!-- Input Circle - Positioned at start -->
+                    <div class="pipe-circle input-circle" id="inputCircle">
+                        <div class="liquid-fill input-liquid" id="inputLiquid"></div>
+                    </div>
+
+                    <!-- Output Circle - Positioned at leak point -->
+                    <div class="pipe-circle output-circle" id="outputCircle">
+                        <div class="liquid-fill output-liquid" id="outputLiquid"></div>
+                    </div>
                 </div>
-                <div class="leak-hole" id="leakHole"></div>
+                <div class="progress-text" id="progressText">0%</div>
             </div>
-            <div class="progress-text" id="progressText">0%</div>
         </div>
 
         <div class="status" id="status">Initializing...</div>
