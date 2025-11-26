@@ -133,6 +133,51 @@ p {
     min-height: 1.5em;
 }
 
+/* Controls */
+.controls {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #2ecc71, #1abc9c);
+    color: white;
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
 /* Liquid Flow Animations */
 @keyframes flowPulse {
     0%, 100% { opacity: 1; }
@@ -214,4 +259,14 @@ p {
 
 .hole-connecting {
     animation: holeConnect 0.4s ease-out;
+}
+
+/* System idle state */
+.system-idle .progress-bar {
+    background: linear-gradient(90deg, #ecf0f1, #d5dbdb);
+}
+
+.system-idle .input-circle {
+    border-color: #7f8c8d;
+    background: #d5dbdb;
 }

@@ -7,9 +7,14 @@ class PipeProgressSystem {
         this.outputLiquid = document.getElementById('outputLiquid');
         this.outputCircle = document.getElementById('outputCircle');
         this.progressBar = document.getElementById('progressBar');
+        this.startButton = document.getElementById('startButton');
+        this.restartButton = document.getElementById('restartButton');
+        this.container = document.querySelector('.container');
 
         this.progress = 0;
         this.isLeaking = false;
+        this.isRunning = false;
+        this.currentInterval = null;
         this.leakThreshold = 85;
         this.leakPosition = 85;
 
@@ -23,19 +28,75 @@ class PipeProgressSystem {
             "Completing installation...",
         ];
 
+        this.setupEventListeners();
         this.setupCircles();
-        this.startProgress();
+        this.showIdleState();
+    }
+
+    setupEventListeners() {
+        this.startButton.addEventListener('click', () => {
+            this.startSystem();
+        });
+
+        this.restartButton.addEventListener('click', () => {
+            this.restartSystem();
+        });
     }
 
     setupCircles() {
-        // Input circle is always at the start (left side)
-        // Output circle will be positioned at leak threshold
         this.updateOutputCirclePosition();
     }
 
     updateOutputCirclePosition() {
-        // Position output circle at the current leak threshold
         this.outputCircle.style.left = `${this.leakPosition}%`;
+    }
+
+    showIdleState() {
+        this.container.classList.add('system-idle');
+        this.status.textContent = "Click Start to begin installation";
+        this.startButton.style.display = 'block';
+        this.restartButton.style.display = 'none';
+    }
+
+    showRunningState() {
+        this.container.classList.remove('system-idle');
+        this.startButton.style.display = 'none';
+        this.restartButton.style.display = 'none';
+    }
+
+    showCompleteState() {
+        this.restartButton.style.display = 'block';
+    }
+
+    startSystem() {
+        if (this.isRunning) return;
+        
+        this.isRunning = true;
+        this.showRunningState();
+        this.resetProgress();
+        this.startProgress();
+    }
+
+    restartSystem() {
+        if (this.isRunning) return;
+        
+        this.startSystem();
+    }
+
+    resetProgress() {
+        this.progress = 0;
+        this.isLeaking = false;
+        this.updateProgressBar();
+        this.updateInputCircle();
+        this.outputLiquid.style.height = '0%';
+        this.outputCircle.style.opacity = '0';
+        this.outputCircle.classList.remove('leaking-hole', 'hole-connecting');
+        
+        // Clear any existing intervals
+        if (this.currentInterval) {
+            clearInterval(this.currentInterval);
+            this.currentInterval = null;
+        }
     }
 
     startProgress() {
@@ -47,14 +108,13 @@ class PipeProgressSystem {
     animateProgress() {
         const speed = 20 + Math.random() * 30;
 
-        const interval = setInterval(() => {
-            if (this.isLeaking) {
+        this.currentInterval = setInterval(() => {
+            if (this.isLeaking || !this.isRunning) {
                 return;
             }
 
             this.progress += Math.random() * 2;
             
-            // Occasionally slow down for "realism"
             if (Math.random() < 0.1) {
                 this.progress += 0.1;
             }
@@ -63,18 +123,17 @@ class PipeProgressSystem {
             this.updateInputCircle();
             this.updateStatus(this.progress);
 
-            // Create bubbles in input circle occasionally
             if (Math.random() < 0.15) {
                 this.createBubble(this.inputCircle, 'input');
             }
 
             if (this.progress >= this.leakThreshold && !this.isLeaking) {
-                clearInterval(interval);
+                clearInterval(this.currentInterval);
                 this.triggerLeak();
             }
 
             if (this.progress >= 100) {
-                clearInterval(interval);
+                clearInterval(this.currentInterval);
                 setTimeout(() => this.triggerLeak(), 500);
             }
         }, speed);
@@ -86,13 +145,11 @@ class PipeProgressSystem {
     }
 
     updateInputCircle() {
-        // Input circle fills as progress increases
         const inputCircleHeight = (this.progress / 100) * 100;
         this.inputLiquid.style.height = `${inputCircleHeight}%`;
     }
 
     updateOutputCircle() {
-        // Output circle fills as progress drains during leak
         const outputCircleHeight = (this.progress / 100) * 100;
         this.outputLiquid.style.height = `${outputCircleHeight}%`;
     }
@@ -101,25 +158,17 @@ class PipeProgressSystem {
         this.isLeaking = true;
         this.status.textContent = "Leak detected! Draining system...";
 
-        // Show and activate output circle (hole)
         this.outputCircle.style.opacity = '1';
         this.outputCircle.classList.add('hole-connecting', 'leaking-hole');
 
-        // Stop input flow
         this.inputLiquid.classList.remove('flowing');
-
-        // Start output flow
         this.outputLiquid.classList.add('flowing');
 
-        // Create dripping effect
         this.createDrippingEffect();
-
-        // Begin draining progress
         this.drainProgress();
     }
 
     createDrippingEffect() {
-        // Create multiple drips from the hole
         for (let i = 0; i < 3; i++) {
             setTimeout(() => {
                 this.createDrip(this.outputCircle);
@@ -143,7 +192,6 @@ class PipeProgressSystem {
         
         holeElement.appendChild(drip);
         
-        // Remove drip after animation
         setTimeout(() => {
             if (drip.parentNode) {
                 drip.parentNode.removeChild(drip);
@@ -152,57 +200,44 @@ class PipeProgressSystem {
     }
 
     drainProgress() {
-        const drainInterval = setInterval(() => {
+        this.currentInterval = setInterval(() => {
+            if (!this.isRunning) return;
+            
             this.progress -= 1.5 + Math.random() * 2;
             
-            // Update both progress bar and circles
             this.updateProgressBar();
             this.updateInputCircle();
             this.updateOutputCircle();
 
-            // Create bubbles in output circle during draining
             if (Math.random() < 0.3) {
                 this.createBubble(this.outputCircle, 'output');
             }
 
-            // Create occasional drips
             if (Math.random() < 0.2) {
                 this.createDrip(this.outputCircle);
             }
 
             if (this.progress <= 5) {
-                clearInterval(drainInterval);
+                clearInterval(this.currentInterval);
                 this.resetSystem();
             }
         }, 40);
     }
 
     resetSystem() {
-        // Hide and deactivate output circle
         this.outputCircle.style.opacity = '0';
         this.outputCircle.classList.remove('leaking-hole', 'hole-connecting');
 
-        // Stop output flow
         this.outputLiquid.classList.remove('flowing');
-        
-        // Reset output circle
         this.outputLiquid.style.height = '0%';
 
-        this.status.textContent = "Patching leaks... Restarting flow...";
+        this.status.textContent = "System drained. Ready for restart.";
 
         setTimeout(() => {
+            this.isRunning = false;
             this.isLeaking = false;
-            
-            // Set new random leak position
-            this.leakThreshold = 75 + Math.random() * 20;
-            this.leakPosition = this.leakThreshold;
-            this.updateOutputCirclePosition();
-            
-            // Restart input flow
-            this.inputLiquid.classList.add('flowing');
-            
-            this.animateProgress();
-        }, 2000);
+            this.showCompleteState();
+        }, 1000);
     }
 
     createBubble(circleElement, type) {
@@ -219,7 +254,6 @@ class PipeProgressSystem {
         
         circleElement.appendChild(bubble);
         
-        // Remove bubble after animation
         setTimeout(() => {
             if (bubble.parentNode) {
                 bubble.parentNode.removeChild(bubble);
