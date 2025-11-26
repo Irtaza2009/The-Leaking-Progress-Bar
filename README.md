@@ -1,1 +1,1 @@
-"# The-Non-Ending-Progress-Bar" 
+# The Non-Ending Progress Bar

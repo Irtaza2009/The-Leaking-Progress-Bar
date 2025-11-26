@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f3f4;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;    
+}
+
+.container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 400px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+p {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    line-height: 1.5;    
+}
+
+.progress-container {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background: #ecf0f1;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #bdc3c7;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress, 0%);
+    background: linear-gradient(90deg, #2ecc71, #1abc9c);
+    border-radius: 15px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.leak-hole {
+    position: absolute;
+    width: 12px;
+    height: 6px;
+    background: #e74c3c;
+    border-radius: 0 0 6px 6px;
+    bottom: -2px;
+    left: 15px;
+    opacity: 0;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.8);
+    transition: opacity 0.3s ease;
+}
+
+.water-drip {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #1abc9c;
+    border-radius: 50%;
+    bottom: -4px;
+    left: 16px;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Water dripping animation */
+@keyframes drip {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(5px) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(25px) scale(0.5);
+    }
+}
+
+@keyframes continuousDrip {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    80% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.3);
+    }
+}
+
+.dripping {
+    animation: continuousDrip 0.8s ease-in infinite;
+}
+
+/* Water stream animation */
+@keyframes waterStream {
+    0% {
+        height: 0;
+        opacity: 0.8;
+    }
+    50% {
+        height: 20px;
+        opacity: 0.6;
+    }
+    100% {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+.water-stream {
+    position: absolute;
+    width: 6px;
+    background: linear-gradient(to bottom, #1abc9c, transparent);
+    bottom: -2px;
+    left: 17px;
+    border-radius: 0 0 3px 3px;
+    animation: waterStream 0.4s ease-out infinite;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    z-index: 1;
+}
+
+.status {
+    margin-top: 1rem;
+    font-style: italic;
+    color: #7f8c8d;
+    min-height: 1.5em;
+}
+
+/* Progress bar shaking when leaking */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+
+.leaking-shake {
+    animation: shake 0.1s ease-in-out infinite;
+}

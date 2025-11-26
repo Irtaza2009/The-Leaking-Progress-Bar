@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Non-Ending Progress Bar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>System Update</h1>
+        <p>Installing updates, please wait...</p>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill">
+                    <div class="water-drip" id="waterDrip"></div>
+                </div>
+                <div class="leak-hole" id="leakHole"></div>
+            </div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+
+        <div class="status" id="status">Initializing...</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
