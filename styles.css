@@ -270,3 +270,18 @@ p {
     border-color: #7f8c8d;
     background: #d5dbdb;
 }
+
+.footer-text {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #7d6b78;
+}
+
+.footer-text a {
+    color: #c28578;
+}
