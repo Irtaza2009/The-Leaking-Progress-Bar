@@ -1,287 +1,298 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f3f4;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;    
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
+  background: #fafafa;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #222;
 }
 
 .container {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    text-align: center;
-    width: 500px;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  width: 420px;
 }
 
 h1 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    font-size: 1.8rem;
+  color: #121212;
+  margin-bottom: 0.6rem;
+  font-size: 1.35rem;
 }
 
 p {
-    color: #7f8c8d;
-    margin-bottom: 2rem;
-    line-height: 1.5;    
+  color: #586069;
+  margin-bottom: 1rem;
+  line-height: 1.4;
 }
 
 .pipe-system {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem 0;
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  position: relative;
 }
 
 /* Progress Bar */
 .progress-container {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .progress-bar {
-    width: 100%;
-    height: 30px;
-    background: #ecf0f1;
-    border-radius: 15px;
-    overflow: visible;
-    position: relative;
-    border: 2px solid #bdc3c7;
+  width: 100%;
+  height: 30px;
+  background: #efefef;
+  border-radius: 8px;
+  overflow: visible;
+  position: relative;
+  border: 1px solid #e0e0e0;
 }
 
 .progress-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: var(--progress, 0%);
-    background: linear-gradient(90deg, #2ecc71, #1abc9c);
-    border-radius: 15px;
-    transition: width 0.3s ease;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--progress, 0%);
+  background: #2ecc71;
+  border-radius: 8px;
+  transition: width 0.25s linear;
+  z-index: 1;
 }
 
 /* Pipe Circles */
 .pipe-circle {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 3px solid #95a5a6;
-    background: #ecf0f1;
-    overflow: hidden;
-    z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid #bfc8cc;
+  background: #f6f7f7;
+  overflow: hidden;
+  z-index: 2;
 }
 
 .input-circle {
-    left: 0;
-    margin-left: 2px;
+  left: 0;
+  margin-left: 2px;
 }
 
 .output-circle {
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* Liquid Fill in Circles */
 .liquid-fill {
-    position: absolute;
-    width: 100%;
-    background: linear-gradient(to bottom, #2ecc71, #1abc9c);
-    transition: height 0.3s ease;
-    border-radius: 50%;
-    bottom: 0;
+  position: absolute;
+  width: 100%;
+  background: linear-gradient(to bottom, #2ecc71, #1abc9c);
+  transition: height 0.3s ease;
+  border-radius: 50%;
+  bottom: 0;
 }
 
 .input-liquid {
-    height: 0%;
+  height: 0%;
 }
 
 .output-liquid {
-    height: 0%;
-    background: linear-gradient(to bottom, #1abc9c, #2ecc71);
+  height: 0%;
+  background: linear-gradient(to bottom, #1abc9c, #2ecc71);
 }
 
 .progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold;
-    color: #2c3e50;
-    font-size: 0.9rem;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-    z-index: 3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  color: #0b3d2e;
+  font-size: 0.85rem;
+  z-index: 3;
 }
 
 .status {
-    margin-top: 1rem;
-    font-style: italic;
-    color: #7f8c8d;
-    min-height: 1.5em;
+  margin-top: 0.8rem;
+  font-style: italic;
+  color: #6b7280;
+  min-height: 1.3em;
 }
 
 /* Controls */
 .controls {
-    margin-top: 1.5rem;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
 }
 
 .btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  padding: 0.6rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
 }
 
 .btn:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-start {
-    background: linear-gradient(135deg, #2ecc71, #1abc9c);
-    color: white;
+  background: #2ecc71;
+  color: white;
 }
 
 .btn-restart {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
+  background: #e55353;
+  color: white;
 }
 
 /* Liquid Flow Animations */
 @keyframes flowPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 .flowing {
-    animation: flowPulse 1s ease-in-out infinite;
+  animation: flowPulse 1s ease-in-out infinite;
 }
 
 /* Leaking Animation */
 @keyframes leakGlow {
-    0%, 100% { 
-        box-shadow: 0 0 5px #e74c3c, 0 0 0 2px #e74c3c;
-    }
-    50% { 
-        box-shadow: 0 0 15px #e74c3c, 0 0 0 3px #e74c3c;
-    }
+  0%,
+  100% {
+    box-shadow: 0 0 4px rgba(231, 76, 60, 0.9);
+  }
+  50% {
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.95);
+  }
 }
 
 .leaking-hole {
-    animation: leakGlow 0.8s ease-in-out infinite;
-    border-color: #e74c3c !important;
+  animation: leakGlow 0.8s ease-in-out infinite;
+  border-color: #e74c3c !important;
 }
 
 /* Bubble animations */
 .bubble {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    animation: bubbleRise 1.5s ease-in infinite;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: bubbleRise 1.4s ease-in infinite;
 }
 
 @keyframes bubbleRise {
-    0% {
-        transform: translateY(0) scale(0.3);
-        opacity: 0;
-    }
-    50% {
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateY(-20px) scale(0.8);
-        opacity: 0;
-    }
+  0% {
+    transform: translateY(0) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-20px) scale(0.8);
+    opacity: 0;
+  }
 }
 
 /* Drip animations */
 @keyframes dripFall {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    80% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(25px) scale(0.5);
-        opacity: 0;
-    }
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(25px) scale(0.5);
+    opacity: 0;
+  }
 }
 
 .dripping {
-    animation: dripFall 1s ease-in infinite;
+  animation: dripFall 1s ease-in infinite;
 }
 
 /* Hole connection animations */
 @keyframes holeConnect {
-    0% {
-        transform: translateY(-50%) scale(0);
-    }
-    70% {
-        transform: translateY(-50%) scale(1.1);
-    }
-    100% {
-        transform: translateY(-50%) scale(1);
-    }
+  0% {
+    transform: translateY(-50%) scale(0);
+  }
+  70% {
+    transform: translateY(-50%) scale(1.1);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
 }
 
 .hole-connecting {
-    animation: holeConnect 0.4s ease-out;
+  animation: holeConnect 0.4s ease-out;
 }
 
 /* System idle state */
 .system-idle .progress-bar {
-    background: linear-gradient(90deg, #ecf0f1, #d5dbdb);
+  background: linear-gradient(90deg, #ecf0f1, #d5dbdb);
 }
 
 .system-idle .input-circle {
-    border-color: #7f8c8d;
-    background: #d5dbdb;
+  border-color: #7f8c8d;
+  background: #d5dbdb;
 }
 
 .footer-text {
-    position: absolute;
-    bottom: 1rem;
-    width: 100%;
-    text-align: center;
-    left: 0;
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    color: #7d6b78;
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #7d6b78;
 }
 
 .footer-text a {
-    color: #c28578;
+  color: #c28578;
 }
