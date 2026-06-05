@@ -1,47 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Pipe Progress System</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="c85911df-17f6-4df4-8679-c8eb6f77fce5"></script>
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="c85911df-17f6-4df4-8679-c8eb6f77fce5"
+    ></script>
+  </head>
+  <body>
     <div class="container">
-        <h1>System Update</h1>
-        <p>Installing updates, please wait...</p>
+      <h1>Loading</h1>
+      <p>Please wait...</p>
 
-        <div class="pipe-system">
-            <!-- Progress Bar -->
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
-                    
-                    <!-- Input Circle - Positioned at start -->
-                    <div class="pipe-circle input-circle" id="inputCircle">
-                        <div class="liquid-fill input-liquid" id="inputLiquid"></div>
-                    </div>
+      <div class="pipe-system">
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
 
-                    <!-- Output Circle - Positioned at leak point -->
-                    <div class="pipe-circle output-circle" id="outputCircle">
-                        <div class="liquid-fill output-liquid" id="outputLiquid"></div>
-                    </div>
-                </div>
-                <div class="progress-text" id="progressText">0%</div>
+            <div class="pipe-circle input-circle" id="inputCircle">
+              <div class="liquid-fill input-liquid" id="inputLiquid"></div>
             </div>
-        </div>
 
-        <div class="status" id="status">Click Start to begin installation</div>
-        
-        <div class="controls">
-            <button id="startButton" class="btn btn-start">Start Installation</button>
-            <button id="restartButton" class="btn btn-restart" style="display: none;">Restart System</button>
+            <div class="pipe-circle output-circle" id="outputCircle">
+              <div class="liquid-fill output-liquid" id="outputLiquid"></div>
+            </div>
+          </div>
+          <div class="progress-text" id="progressText">0%</div>
         </div>
+      </div>
+
+      <div class="status" id="status">Click Start to begin loading</div>
+
+      <div class="controls">
+        <button id="startButton" class="btn btn-start">Start</button>
+        <button
+          id="restartButton"
+          class="btn btn-restart"
+          style="display: none"
+        >
+          Restart
+        </button>
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
-<footer>
-    <p class="footer-text">Made with ❤️ by <a href="https://irtaza.xyz/">Irtaza</a> - <a href="https://github.com/Irtaza2009/">GitHub</a></p>
-</footer>
+  </body>
+  <footer>
+    <p class="footer-text">
+      Made by <a href="https://irtaza.xyz/">Irtaza</a> -
+      <a href="https://github.com/Irtaza2009/">GitHub</a>
+    </p>
+  </footer>
 </html>
